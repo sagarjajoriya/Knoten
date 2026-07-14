@@ -1,0 +1,33 @@
+{
+  "name": "@knoten/config-eslint",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Shared ESLint flat configurations for the Knoten monorepo",
+  "type": "module",
+  "exports": {
+    "./base": "./base.js",
+    "./react": "./react.js",
+    "./nestjs": "./nestjs.js",
+    "./monorepo": "./monorepo.js"
+  },
+  "files": [
+    "base.js",
+    "react.js",
+    "nestjs.js",
+    "monorepo.js"
+  ],
+  "dependencies": {
+    "@eslint/js": "^9.37.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react": "^7.37.5",
+    "eslint-plugin-react-hooks": "^7.0.0",
+    "eslint-plugin-react-refresh": "^0.4.24",
+    "globals": "^16.4.0",
+    "typescript-eslint": "^8.46.0"
+  },
+  "peerDependencies": {
+    "eslint": "^9.0.0",
+    "typescript": "^5.9.0"
+  }
+}

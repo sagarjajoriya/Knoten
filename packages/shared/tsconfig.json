@@ -1,0 +1,9 @@
+{
+  "extends": "@knoten/config-typescript/base.json",
+  "compilerOptions": {
+    "composite": false,
+    "noEmit": true
+  },
+  "include": ["src/**/*.test.ts", "vitest.config.ts"],
+  "references": [{ "path": "./tsconfig.build.json" }]
+}

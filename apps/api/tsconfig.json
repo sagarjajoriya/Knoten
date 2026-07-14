@@ -1,0 +1,13 @@
+{
+  "extends": "@knoten/config-typescript/nestjs.json",
+  "compilerOptions": {
+    "composite": false,
+    "noEmit": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "references": [{ "path": "../../packages/shared/tsconfig.build.json" }],
+  "include": ["src/**/*.ts", "vitest.config.ts"]
+}

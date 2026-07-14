@@ -1,0 +1,202 @@
+@import 'tailwindcss';
+
+/* ============================================================================
+   Knoten — "Blaupause" design system
+   Single source of truth for design tokens. See docs/design/knoten-design-spec.html
+   for the full visual specification.
+
+   Architecture (spec §10):
+     Layer 1  raw primitives
+     Layer 2  semantic runtime vars (--surface, --ink-2, --accent …) — these FLIP per theme
+     Layer 3  Tailwind utilities generated from the semantic layer via @theme inline
+
+   Because tokens are semantic, components almost never need `dark:` — they use
+   `bg-surface text-ink-2 border-line` and are theme-correct automatically.
+   ========================================================================== */
+
+/* ---- Layer 2: semantic tokens — LIGHT (default) --------------------------- */
+:root {
+  color-scheme: light dark;
+
+  --bg: #f6f7fa;
+  --surface: #ffffff;
+  --surface-2: #f0f2f7;
+  --line: #e3e6ee;
+  --line-strong: #c9cedc;
+
+  --ink: #171a26;
+  --ink-2: #4c5265;
+  --ink-3: #8a90a5;
+
+  --accent: #2e4fd8;
+  --accent-hover: #2440b8;
+  --accent-text: #2e4fd8;
+  --accent-soft: #e9edfd;
+  --on-accent: #ffffff;
+
+  --ok: #188a4c;
+  --ok-soft: #e3f4ea;
+  --warn: #b45309;
+  --warn-soft: #fbeedd;
+  --err: #c93838;
+  --err-soft: #fbe7e7;
+
+  --canvas-dot: #d2d7e4;
+
+  --shadow-1: 0 1px 2px rgba(23, 26, 38, 0.06);
+  --shadow-2: 0 2px 8px rgba(23, 26, 38, 0.08), 0 1px 2px rgba(23, 26, 38, 0.05);
+  --shadow-3: 0 12px 32px rgba(23, 26, 38, 0.14), 0 2px 8px rgba(23, 26, 38, 0.08);
+}
+
+/* ---- DARK: follows the OS unless an explicit theme is set ------------------ */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #0c0e14;
+    --surface: #12151e;
+    --surface-2: #191d2a;
+    --line: #232838;
+    --line-strong: #363d55;
+
+    --ink: #e8eaf3;
+    --ink-2: #a6acc2;
+    --ink-3: #6d7490;
+
+    --accent: #5e77e8;
+    --accent-hover: #7289ee;
+    --accent-text: #96a7f5;
+    --accent-soft: #1b2140;
+    --on-accent: #ffffff;
+
+    --ok: #2fae6e;
+    --ok-soft: #10281c;
+    --warn: #c08327;
+    --warn-soft: #2b2110;
+    --err: #d95560;
+    --err-soft: #301418;
+
+    --canvas-dot: #262c3e;
+
+    --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+    --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(0, 0, 0, 0.3);
+    --shadow-3: 0 12px 32px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* ---- DARK: explicit user choice always wins over the OS -------------------- */
+:root[data-theme='dark'] {
+  --bg: #0c0e14;
+  --surface: #12151e;
+  --surface-2: #191d2a;
+  --line: #232838;
+  --line-strong: #363d55;
+
+  --ink: #e8eaf3;
+  --ink-2: #a6acc2;
+  --ink-3: #6d7490;
+
+  --accent: #5e77e8;
+  --accent-hover: #7289ee;
+  --accent-text: #96a7f5;
+  --accent-soft: #1b2140;
+  --on-accent: #ffffff;
+
+  --ok: #2fae6e;
+  --ok-soft: #10281c;
+  --warn: #c08327;
+  --warn-soft: #2b2110;
+  --err: #d95560;
+  --err-soft: #301418;
+
+  --canvas-dot: #262c3e;
+
+  --shadow-1: 0 1px 2px rgba(0, 0, 0, 0.4);
+  --shadow-2: 0 2px 8px rgba(0, 0, 0, 0.45), 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-3: 0 12px 32px rgba(0, 0, 0, 0.55), 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+/* ============================================================================
+   Layer 3: expose the semantic layer to Tailwind.
+   `inline` emits utilities as var(--token) so they flip at runtime.
+   Colors here generate bg, text, border and ring utilities per token.
+   ========================================================================== */
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+
+  --color-ink: var(--ink);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-accent-text: var(--accent-text);
+  --color-accent-soft: var(--accent-soft);
+  --color-on-accent: var(--on-accent);
+
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-err: var(--err);
+  --color-err-soft: var(--err-soft);
+
+  --color-canvas-dot: var(--canvas-dot);
+
+  /* Type (spec §12) — free alternates, self-hosted via @fontsource, loaded in
+     main.tsx. Swap the first family for Suisse Int'l / Berkeley Mono if licensed. */
+  --font-sans: 'Instrument Sans Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono Variable', 'SF Mono', 'JetBrains Mono', Menlo, Consolas, monospace;
+
+  /* Radii (spec §15) */
+  --radius-input: 6px;
+  --radius-btn: 8px;
+  --radius-card: 10px;
+  --radius-panel: 12px;
+
+  /* Elevation (spec §15) */
+  --shadow-e1: var(--shadow-1);
+  --shadow-e2: var(--shadow-2);
+  --shadow-e3: var(--shadow-3);
+
+  /* Motion (spec §16) */
+  --ease-brand: cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Escape-hatch `dark:` variant for the rare component that can't be expressed
+   with semantic tokens. Tracks the explicit attribute (deterministic case). */
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+/* ---- Base ----------------------------------------------------------------- */
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  font-variant-numeric: tabular-nums;
+}
+
+/* One focus ring, product-wide (spec §20) */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
