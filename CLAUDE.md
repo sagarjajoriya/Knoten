@@ -1,7 +1,14 @@
 # Knoten
 
-Premium workflow automation platform (n8n-class canvas · Zapier approachability ·
-Make execution visibility · Figma/Linear/Notion interaction standards).
+Workflow automation platform.
+
+Goals:
+
+- Visual workflow builder
+- High performance
+- Excellent UX
+- Accessible
+- Production ready
 
 Monorepo: pnpm + turbo.
 
@@ -70,3 +77,29 @@ theme palettes are currently CVD-audited and passing.
 - `pnpm dev` — all apps (turbo). `pnpm --filter @knoten/web dev` — web only (:5173).
 - `pnpm build` · `pnpm lint` · `pnpm typecheck` · `pnpm test` — all via turbo.
 - `pnpm format` — prettier (with tailwindcss class sorting).
+
+## General Rules
+
+- Don't guess requirements. Ask if something is unclear.
+- Don't implement future features unless requested.
+- Reuse existing components and patterns before creating new ones.
+
+## Engineering Principles
+
+- Follow feature-based architecture.
+- Keep components small and focused.
+- Prefer composition over inheritance.
+- Follow SOLID, DRY, and KISS.
+- Use strict TypeScript. Never use `any`.
+- Never introduce a new dependency without approval.
+- Avoid premature abstractions.
+- Reuse existing components before creating new ones.
+
+## Code Quality
+
+- Keep functions focused.
+- Avoid deeply nested conditionals.
+- Prefer early returns.
+- Avoid duplicate logic.
+- Prefer explicit names over abbreviations.
+- Optimize readability before cleverness.
