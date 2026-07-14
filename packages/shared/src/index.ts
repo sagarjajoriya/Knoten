@@ -8,3 +8,4 @@
  */
 export * from './result';
 export * from './validation';
+export * from './workflow/workflow.schema';
