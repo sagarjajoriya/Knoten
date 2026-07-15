@@ -213,4 +213,16 @@ body {
   --xy-controls-button-color-hover: var(--ink);
   --xy-controls-button-border-color: var(--line);
   --xy-controls-box-shadow: var(--shadow-2);
+  --xy-handle-background-color: var(--surface);
+  --xy-handle-border-color: var(--line-strong);
+  --xy-edge-stroke: var(--line-strong);
+  --xy-edge-stroke-selected: var(--accent);
+  --xy-connectionline-stroke: var(--accent);
+}
+
+/* Ports on the vertical midline — 9px circles, 2px ring (spec §04). */
+.react-flow .react-flow__handle {
+  width: 9px;
+  height: 9px;
+  border-width: 2px;
 }
