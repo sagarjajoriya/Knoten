@@ -200,3 +200,17 @@ body {
     transition-duration: 0.001ms !important;
   }
 }
+
+/* ---- Workflow canvas (spec §04) ------------------------------------------
+   Map React Flow's own CSS variables onto our semantic tokens so the canvas,
+   grid, and zoom controls theme automatically in both light and dark. Only the
+   surface-level chrome is wired here; node/edge tokens land with those slices. */
+.react-flow {
+  --xy-background-color: transparent;
+  --xy-controls-button-background-color: var(--surface);
+  --xy-controls-button-background-color-hover: var(--surface-2);
+  --xy-controls-button-color: var(--ink-2);
+  --xy-controls-button-color-hover: var(--ink);
+  --xy-controls-button-border-color: var(--line);
+  --xy-controls-box-shadow: var(--shadow-2);
+}

@@ -3,6 +3,7 @@ import { Link, Navigate, Route, Routes } from 'react-router-dom';
 
 import { AppShell } from '@/app/layout/AppShell';
 import { PlaceholderPage } from '@/app/layout/PlaceholderPage';
+import { WorkflowBuilderPage } from '@/features/builder/WorkflowBuilderPage';
 import { DashboardPage } from '@/features/dashboard/DashboardPage';
 
 const DEFAULT_WORKSPACE = 'acme';
@@ -28,6 +29,7 @@ export function AppRouter(): ReactNode {
             />
           }
         />
+        <Route path="flows/:flowId/edit" element={<WorkflowBuilderPage />} />
         <Route
           path="runs"
           element={
