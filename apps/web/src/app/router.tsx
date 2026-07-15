@@ -3,6 +3,7 @@ import { Link, Navigate, Route, Routes } from 'react-router-dom';
 
 import { AppShell } from '@/app/layout/AppShell';
 import { PlaceholderPage } from '@/app/layout/PlaceholderPage';
+import { DashboardPage } from '@/features/dashboard/DashboardPage';
 
 const DEFAULT_WORKSPACE = 'acme';
 
@@ -17,15 +18,7 @@ export function AppRouter(): ReactNode {
       <Route path="/" element={<Navigate to={`/w/${DEFAULT_WORKSPACE}`} replace />} />
 
       <Route path="/w/:workspace" element={<AppShell />}>
-        <Route
-          index
-          element={
-            <PlaceholderPage
-              title="Home"
-              description="Your workspace at a glance — automation health, what needs attention, and recent runs."
-            />
-          }
-        />
+        <Route index element={<DashboardPage />} />
         <Route
           path="flows"
           element={
