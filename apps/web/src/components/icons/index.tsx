@@ -156,3 +156,29 @@ export const MoonIcon: IconComponent = (props) => (
     <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
   </Icon>
 );
+
+export const ArrowUpIcon: IconComponent = (props) => (
+  <Icon {...props}>
+    <path d="M12 19V5" />
+    <path d="m6 11 6-6 6 6" />
+  </Icon>
+);
+
+export const ArrowDownIcon: IconComponent = (props) => (
+  <Icon {...props}>
+    <path d="M12 5v14" />
+    <path d="m6 13 6 6 6-6" />
+  </Icon>
+);
+
+export const MinusIcon: IconComponent = (props) => (
+  <Icon {...props}>
+    <path d="M5 12h14" />
+  </Icon>
+);
+
+export const CheckIcon: IconComponent = (props) => (
+  <Icon {...props}>
+    <path d="m5 12.5 5 5L19.5 7" />
+  </Icon>
+);

@@ -1,0 +1,136 @@
+import { type DashboardData } from '../types';
+
+/**
+ * Static sample data for the Dashboard surface. No API, no business logic — this
+ * mirrors the shape a real query would return so the UI is fully exercised.
+ */
+export const dashboardData: DashboardData = {
+  totalWorkflows: 142,
+  tiles: [
+    {
+      id: 'runs-24h',
+      label: 'Runs · 24 h',
+      value: '12,847',
+      delta: { direction: 'up', tone: 'positive', label: '8.2% vs yesterday' },
+    },
+    {
+      id: 'success-rate',
+      label: 'Success rate',
+      value: '99.2%',
+      delta: { direction: 'flat', tone: 'neutral', label: 'steady' },
+    },
+    {
+      id: 'failing-now',
+      label: 'Failing now',
+      value: '3',
+      critical: true,
+      delta: { direction: 'up', tone: 'negative', label: '2 new since 9:00' },
+    },
+    {
+      id: 'active-workflows',
+      label: 'Active workflows',
+      value: '142',
+      delta: { direction: 'up', tone: 'positive', label: '5 this week' },
+    },
+  ],
+  trend: [
+    { label: 'Jun 30', fullLabel: 'Mon · Jun 30', runs: 9120, successRate: 99.1 },
+    { label: 'Jul 1', fullLabel: 'Tue · Jul 1', runs: 9380, successRate: 99.3 },
+    { label: 'Jul 2', fullLabel: 'Wed · Jul 2', runs: 9040, successRate: 98.9 },
+    { label: 'Jul 3', fullLabel: 'Thu · Jul 3', runs: 9660, successRate: 99.4 },
+    { label: 'Jul 4', fullLabel: 'Fri · Jul 4', runs: 9510, successRate: 99.2 },
+    { label: 'Jul 5', fullLabel: 'Sat · Jul 5', runs: 10240, successRate: 99.5 },
+    { label: 'Jul 6', fullLabel: 'Sun · Jul 6', runs: 9980, successRate: 99.3 },
+    { label: 'Jul 7', fullLabel: 'Mon · Jul 7', runs: 10870, successRate: 99.6 },
+    { label: 'Jul 8', fullLabel: 'Tue · Jul 8', runs: 10610, successRate: 99.4 },
+    { label: 'Jul 9', fullLabel: 'Wed · Jul 9', runs: 11432, successRate: 99.4 },
+    { label: 'Jul 10', fullLabel: 'Thu · Jul 10', runs: 11180, successRate: 99.5 },
+    { label: 'Jul 11', fullLabel: 'Fri · Jul 11', runs: 11920, successRate: 99.6 },
+    { label: 'Jul 12', fullLabel: 'Sat · Jul 12', runs: 12280, successRate: 99.5 },
+    { label: 'Jul 13', fullLabel: 'Sun · Jul 13', runs: 12847, successRate: 99.2 },
+  ],
+  attention: [
+    {
+      id: 'stripe-netsuite',
+      name: 'Stripe → NetSuite sync',
+      tone: 'err',
+      statusLabel: 'Failing',
+      meta: '12 consecutive failures · auth expired',
+      action: 'Fix',
+    },
+    {
+      id: 'lead-scoring',
+      name: 'Lead scoring',
+      tone: 'err',
+      statusLabel: 'Failing',
+      meta: 'Timeout on step 4 · started 10:12',
+      action: 'Fix',
+    },
+    {
+      id: 'daily-digest',
+      name: 'Daily digest email',
+      tone: 'warn',
+      statusLabel: 'Degraded',
+      meta: 'p95 latency 4.1× baseline',
+      action: 'View',
+    },
+    {
+      id: 'slack-onboarding',
+      name: 'Slack onboarding',
+      tone: 'warn',
+      statusLabel: 'Retrying',
+      meta: 'Rate-limited · retry 2 of 5 at 11:40',
+      action: 'View',
+    },
+  ],
+  recentRuns: [
+    {
+      id: 'run_8f2a91',
+      workflow: 'New signup → welcome sequence',
+      tone: 'ok',
+      statusLabel: 'Succeeded',
+      startedAt: '2 min ago',
+      duration: '1.2s',
+    },
+    {
+      id: 'run_8f2a90',
+      workflow: 'Stripe → NetSuite sync',
+      tone: 'err',
+      statusLabel: 'Failed',
+      startedAt: '4 min ago',
+      duration: '0.4s',
+    },
+    {
+      id: 'run_8f2a8e',
+      workflow: 'Support ticket triage',
+      tone: 'ok',
+      statusLabel: 'Succeeded',
+      startedAt: '6 min ago',
+      duration: '3.8s',
+    },
+    {
+      id: 'run_8f2a8b',
+      workflow: 'Slack onboarding',
+      tone: 'run',
+      statusLabel: 'Running',
+      startedAt: '7 min ago',
+      duration: '—',
+    },
+    {
+      id: 'run_8f2a87',
+      workflow: 'Daily digest email',
+      tone: 'warn',
+      statusLabel: 'Degraded',
+      startedAt: '12 min ago',
+      duration: '9.1s',
+    },
+    {
+      id: 'run_8f2a82',
+      workflow: 'Invoice PDF generator',
+      tone: 'ok',
+      statusLabel: 'Succeeded',
+      startedAt: '15 min ago',
+      duration: '2.0s',
+    },
+  ],
+};
