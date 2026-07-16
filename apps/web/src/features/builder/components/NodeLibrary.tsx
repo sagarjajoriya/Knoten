@@ -1,6 +1,7 @@
 import { useMemo, useState, type ReactNode } from 'react';
 
 import { NODE_CATEGORIES } from '../nodes/categories';
+import { setNodeDragData } from '../nodes/dnd';
 import { getNodeDefinitionsByCategory } from '../nodes/registry';
 import { type NodeDefinition } from '../nodes/types';
 
@@ -75,7 +76,12 @@ export function NodeLibrary(): ReactNode {
                   return (
                     <li
                       key={definition.type}
-                      className="hover:bg-surface-2 flex items-center gap-2.5 px-3 py-1.5"
+                      draggable
+                      onDragStart={(event) => {
+                        setNodeDragData(event, definition.type);
+                      }}
+                      title={`Drag “${definition.label}” onto the canvas`}
+                      className="hover:bg-surface-2 flex cursor-grab items-center gap-2.5 px-3 py-1.5 active:cursor-grabbing"
                     >
                       <span
                         className={cn(
