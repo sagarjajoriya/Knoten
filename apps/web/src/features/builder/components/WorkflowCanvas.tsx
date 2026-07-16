@@ -5,11 +5,14 @@ import {
   ReactFlow,
   ReactFlowProvider,
   useReactFlow,
+  type Connection,
+  type Edge,
 } from '@xyflow/react';
 import { useCallback, type DragEvent, type ReactNode } from 'react';
 
 import '@xyflow/react/dist/style.css';
 
+import { isConnectionAllowed } from '../connections/rules';
 import { getDraggedNodeType } from '../nodes/dnd';
 import { nodeTypes } from '../nodes/node-types';
 import { createNode } from '../nodes/registry';
@@ -27,7 +30,15 @@ interface WorkflowCanvasProps {
 
 function WorkflowCanvasInner({ defaultNodes = [] }: WorkflowCanvasProps): ReactNode {
   const { resolvedTheme } = useTheme();
-  const { screenToFlowPosition, addNodes } = useReactFlow();
+  const { screenToFlowPosition, addNodes, getEdges } = useReactFlow();
+
+  // The extensible gate for connections: React Flow runs this during the connect
+  // drag (visual valid/invalid feedback) and again before committing the edge.
+  const isValidConnection = useCallback(
+    (connection: Connection | Edge): boolean =>
+      isConnectionAllowed(connection, { edges: getEdges() }),
+    [getEdges],
+  );
 
   // Allow dropping onto the pane — without preventDefault the browser blocks it.
   const onDragOver = useCallback((event: DragEvent): void => {
@@ -57,6 +68,9 @@ function WorkflowCanvasInner({ defaultNodes = [] }: WorkflowCanvasProps): ReactN
       defaultEdges={[]}
       onDrop={onDrop}
       onDragOver={onDragOver}
+      isValidConnection={isValidConnection}
+      multiSelectionKeyCode={null}
+      selectionKeyCode={null}
       panOnScroll
       zoomOnScroll={false}
       zoomOnPinch
@@ -82,7 +96,10 @@ function WorkflowCanvasInner({ defaultNodes = [] }: WorkflowCanvasProps): ReactN
  * model — two-finger scroll pans, ⌘/pinch zooms — a dotted grid, and zoom/fit
  * controls. Node *types* come from the registry via `nodeTypes`; dragging a node
  * from the Node Library drops a new instance at the cursor (data seeded from the
- * registry). Connections and node configuration are out of scope here.
+ * registry). Clicking a node selects exactly one (multi-select is disabled).
+ * Dragging between handles connects compatible nodes — `isValidConnection` gates
+ * the drag (no self- or duplicate connections); a selected wire highlights and
+ * Backspace deletes it. Node configuration is out of scope here.
  *
  * Owns its own `ReactFlowProvider` so the drop handler can use `useReactFlow`
  * without the surrounding page having to know about React Flow internals.

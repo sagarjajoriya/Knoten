@@ -217,7 +217,9 @@ body {
   --xy-handle-border-color: var(--line-strong);
   --xy-edge-stroke: var(--line-strong);
   --xy-edge-stroke-selected: var(--accent);
+  --xy-edge-stroke-width: 2;
   --xy-connectionline-stroke: var(--accent);
+  --xy-connectionline-stroke-width: 2;
 }
 
 /* Ports on the vertical midline — 9px circles, 2px ring (spec §04). */
