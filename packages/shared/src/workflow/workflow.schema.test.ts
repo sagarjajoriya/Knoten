@@ -2,7 +2,14 @@ import { describe, expect, it } from 'vitest';
 
 import { safeParse } from '../validation';
 
-import { workflowNodeSchema, workflowSchema, type Workflow } from './workflow.schema';
+import {
+  WORKFLOW_SCHEMA_VERSION,
+  workflowDocumentSchema,
+  workflowNodeSchema,
+  workflowSchema,
+  type Workflow,
+  type WorkflowDocument,
+} from './workflow.schema';
 
 const validNode = {
   id: 'node-1',
@@ -77,5 +84,36 @@ describe('workflowSchema', () => {
       edges: [],
     });
     expect(result.ok).toBe(true);
+  });
+});
+
+describe('workflowNodeSchema · type', () => {
+  it('accepts a node carrying a concrete type id', () => {
+    const result = safeParse(workflowNodeSchema, { ...validNode, type: 'manual-trigger' });
+    expect(result.ok).toBe(true);
+  });
+});
+
+describe('workflowDocumentSchema', () => {
+  const validDocument: WorkflowDocument = {
+    ...validWorkflow,
+    schemaVersion: WORKFLOW_SCHEMA_VERSION,
+    viewport: { x: 0, y: 0, zoom: 1 },
+  };
+
+  it('accepts a document with version and viewport', () => {
+    const result = safeParse(workflowDocumentSchema, validDocument);
+    expect(result.ok).toBe(true);
+  });
+
+  it('rejects an unknown schema version', () => {
+    const result = safeParse(workflowDocumentSchema, { ...validDocument, schemaVersion: 999 });
+    expect(result.ok).toBe(false);
+  });
+
+  it('rejects a missing viewport', () => {
+    const { viewport: _viewport, ...withoutViewport } = validDocument;
+    const result = safeParse(workflowDocumentSchema, withoutViewport);
+    expect(result.ok).toBe(false);
   });
 });
