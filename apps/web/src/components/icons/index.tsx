@@ -182,3 +182,20 @@ export const CheckIcon: IconComponent = (props) => (
     <path d="m5 12.5 5 5L19.5 7" />
   </Icon>
 );
+
+/** Manual trigger — a pointer, "run it yourself". */
+export const CursorIcon: IconComponent = (props) => (
+  <Icon {...props}>
+    <path d="M5 3l14 8-6.5 1.5L9 19 5 3z" />
+  </Icon>
+);
+
+/** HTTP request — a globe, "call any API". */
+export const GlobeIcon: IconComponent = (props) => (
+  <Icon {...props}>
+    <circle cx="12" cy="12" r="9" />
+    <path d="M3 12h18" />
+    <path d="M12 3c2.5 2.6 2.5 15.4 0 18" />
+    <path d="M12 3c-2.5 2.6-2.5 15.4 0 18" />
+  </Icon>
+);
