@@ -2,6 +2,7 @@ import { ReactFlowProvider } from '@xyflow/react';
 import { type ReactNode } from 'react';
 
 import { NodeLibrary } from './components/NodeLibrary';
+import { PropertiesPanel } from './components/PropertiesPanel';
 import { WorkflowCanvas } from './components/WorkflowCanvas';
 import { WorkflowHistoryProvider } from './history/WorkflowHistoryProvider';
 import { createNode } from './nodes/registry';
@@ -17,8 +18,9 @@ const demoNodes: readonly KnotenNode[] = [
 
 /**
  * Workflow Builder surface (spec §04–05) — the routed entry for editing a flow.
- * Owns the `ReactFlowProvider` so the Node Library, canvas, and history share one
- * graph store; the node inspector and bottom toolbar land in later slices.
+ * Owns the `ReactFlowProvider` so the Node Library, canvas, history, and
+ * Properties Panel share one graph store; the bottom toolbar lands in a later
+ * slice.
  */
 export function WorkflowBuilderPage(): ReactNode {
   return (
@@ -29,6 +31,7 @@ export function WorkflowBuilderPage(): ReactNode {
           <div className="bg-bg relative min-w-0 flex-1">
             <WorkflowCanvas defaultNodes={demoNodes} />
           </div>
+          <PropertiesPanel />
         </div>
       </WorkflowHistoryProvider>
     </ReactFlowProvider>

@@ -1,4 +1,5 @@
 import { ManualTriggerNode, type ManualTriggerData } from '../components/ManualTriggerNode';
+import { ManualTriggerEditor } from '../editors/ManualTriggerEditor';
 import { defineNode } from '../types';
 
 import { CursorIcon } from '@/components/icons';
@@ -12,4 +13,5 @@ export const manualTriggerDefinition = defineNode<ManualTriggerData>({
   description: 'Start this workflow by running it yourself.',
   defaultData: { label: 'Manual Trigger' },
   component: ManualTriggerNode,
+  propertiesEditor: ManualTriggerEditor,
 });

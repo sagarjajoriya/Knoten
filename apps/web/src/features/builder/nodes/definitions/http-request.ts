@@ -1,4 +1,5 @@
 import { HttpRequestNode, type HttpRequestData } from '../components/HttpRequestNode';
+import { HttpRequestEditor } from '../editors/HttpRequestEditor';
 import { defineNode } from '../types';
 
 import { GlobeIcon } from '@/components/icons';
@@ -12,4 +13,5 @@ export const httpRequestDefinition = defineNode<HttpRequestData>({
   description: 'Call any HTTP API and use the response downstream.',
   defaultData: { label: 'HTTP Request', method: 'GET', url: '' },
   component: HttpRequestNode,
+  propertiesEditor: HttpRequestEditor,
 });
