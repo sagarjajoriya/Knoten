@@ -30,10 +30,24 @@ export type NodeComponent<TData extends BaseNodeData = BaseNodeData> = (
   props: NodeComponentProps<TData>,
 ) => ReactNode;
 
+/** Props a node's Properties Panel editor receives. */
+export interface NodePropertiesEditorProps<TData extends BaseNodeData = BaseNodeData> {
+  /** The selected node's current data. */
+  readonly data: TData;
+  /** Merge a partial patch into the node's data — reflects on the canvas at once. */
+  readonly updateData: (patch: Partial<TData>) => void;
+}
+
+/** The form a node type renders in the Properties Panel to edit its config. */
+export type NodePropertiesEditor<TData extends BaseNodeData = BaseNodeData> = (
+  props: NodePropertiesEditorProps<TData>,
+) => ReactNode;
+
 /**
  * A single entry in the Node Registry — everything the app needs to list a node
- * in the library and render it on the canvas. Pure static metadata: it holds no
- * React Flow *state* (no nodes/edges arrays, no store), only the definition.
+ * in the library, render it on the canvas, and edit it in the Properties Panel.
+ * Pure static metadata: it holds no React Flow *state* (no nodes/edges arrays, no
+ * store), only the definition.
  */
 export interface NodeDefinition<TData extends BaseNodeData = BaseNodeData> {
   /** Unique node-type id; also the key React Flow uses in `nodeTypes`. */
@@ -48,6 +62,8 @@ export interface NodeDefinition<TData extends BaseNodeData = BaseNodeData> {
   readonly defaultData: TData;
   /** Component React Flow uses to render instances of this node. */
   readonly component: NodeComponent<TData>;
+  /** Form the Properties Panel renders to edit a selected instance's data. */
+  readonly propertiesEditor: NodePropertiesEditor<TData>;
 }
 
 /**
